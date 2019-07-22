@@ -26,7 +26,10 @@ fn main() {
     file.seek(SeekFrom::Start(2));
     let mut address = starting_address; 
     for chunk in &file.bytes().chunks(8) {
-        let chunk = chunk.map(|r: Result<u8, _>| r.unwrap()).collect::<Vec<u8>>();
+        let mut chunk = chunk.map(|r: Result<u8, _>| r.unwrap()).collect::<Vec<u8>>();
+        while chunk.len() < 8 {
+            chunk.push(0);
+        }
         let checksum = mlx_checksum(address, &chunk);
         let mut output = format!("{:04X}: {:02X?} {:02X}", address, chunk, checksum);
         output = output.replace("[","");
