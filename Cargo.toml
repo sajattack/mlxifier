@@ -1,0 +1,7 @@
+[package]
+name = "mlxifier"
+version = "0.1.0"
+authors = ["Paul Sajna <paulsajna@gmail.com>"]
+
+[dependencies]
+itertools = "0.7"
